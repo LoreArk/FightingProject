@@ -1,6 +1,6 @@
-# FighterProject - 3D Beat 'Em Up Code Showcase
+# FightingProject - 3D Beat 'Em Up Code Showcase
 
-Welcome to **FighterProject**, a 3D beat 'em up game developed in Unreal Engine using C++. This repository serves as a **code showcase** and is not intended as a full game distribution. The purpose of this repo is to highlight specific gameplay mechanics, systems, and design patterns used in this Unreal Engine project.
+Welcome to **FightingProject** source code repository, a 3D beat 'em up game developed in Unreal Engine using C++. This repository serves as a **code showcase** and is not intended as a full game distribution. The purpose of this repo is to showcase the coded gameplay systems, and design patterns used in this Unreal Engine project.
 
 ## Project Overview
 - **Type**: 3D Beat 'Em Up Game
