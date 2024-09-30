@@ -4,6 +4,8 @@
 #include "ANS_AttackAnticipationTrace.h"
 #include "Interface_Player.h"
 
+//This anim notify is used to set the frame of the attack montage that makes the enemy AI aware of the incoming attack, and trigger the AI reaction (block, dodge or nothing)
+
 void UANS_AttackAnticipationTrace::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration)
 {
     Super::NotifyBegin(MeshComp, Animation, TotalDuration);
@@ -17,15 +19,4 @@ void UANS_AttackAnticipationTrace::NotifyBegin(USkeletalMeshComponent* MeshComp,
              IInterface_Player::Execute_AttackAnticipationTrace(OwnerActor);
         }
     }
-}
-
-void UANS_AttackAnticipationTrace::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime)
-{
-    Super::NotifyTick(MeshComp, Animation, FrameDeltaTime);
-
-}
-
-void UANS_AttackAnticipationTrace::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
-{
-    Super::NotifyEnd(MeshComp, Animation);
 }
