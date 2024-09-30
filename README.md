@@ -12,7 +12,7 @@ The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.
 - **Combat System**: 
   - A player-customizable combo system
   - AI attack selection capable of hosting different movesets for diverse enemy designs
-  - Characters properties designed to be tweaked and adjusted to design enemy power levels and variety
+  - Enemy character properties designed to be tweaked and adjusted to design enemy power levels and variety
   - Hit effects, and hit states (i.e. juggling, stagger, stun, launched) enemies
   - Directional hit reactions
   - Enemy grab system
