@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "AnimNotifyState_HoldAttack.h"
 #include "Interface_Player.h"
 #include "Kismet/GameplayStatics.h"
 #include "FightingProjectCharacter.h"
+
+//Keep track of held attack input during animation to perform a charged attack
 
 void UAnimNotifyState_HoldAttack::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration)
 {
