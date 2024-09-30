@@ -56,6 +56,7 @@ void AEnemyBase::BeginPlay()
 		GetMesh()->GetAnimInstance()->LinkAnimClassLayers(DefaultAnimClassLayer);
 	}
 
+	//Initialize movesets from data tables
 	if (AttackUnarmedMovesetData)
 	{
 		F_AIAttacksData* UnarmedAttackData = AttackUnarmedMovesetData->FindRow<F_AIAttacksData>("Attacks", TEXT(""));
@@ -174,6 +175,7 @@ void AEnemyBase::Tick(float DeltaTime)
 
 FRotator AEnemyBase::GetBaseAimRotation() const
 {
+	//Adjust the BaseAimRotation to take into consideration the pitch rotation, i.e. the difference in height between the actor and its target
 	AController* CharController = GetController();
 	if (CharController)
 	{
@@ -349,6 +351,7 @@ void AEnemyBase::SetIsTargeted_Implementation(bool bIsTargeted)
 
 float AEnemyBase::SetMovementSpeed_Implementation(EMovementSpeed Speed)
 {
+	//This function is called exclusively by a Behavior Tree Task through the Interface_Enemy
 	float TargetSpeed = 0.f;
 	switch (Speed)
 	{
@@ -394,7 +397,7 @@ bool AEnemyBase::GetIsStunned_Implementation()
 	}
 }
 
-
+//this function is called through the Interface_CombatCharacter by the Component_Damagable, after having selected the proper hit reaction to play based on location and hit direction
 void AEnemyBase::PlayHitReaction_Implementation(UAnimMontage* TargetMontage, AActor* DamageInstigator)
 {
 	if (ShouldStopMontageForHitReaction())
@@ -446,6 +449,7 @@ void AEnemyBase::PlayGetUpMontage()
 	GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(BlendingOutDelegate, GetUpMontage);
 }
 
+//Calculate the proper dodge to perform based on context conditions
 int AEnemyBase::GetDodgeMontageIndex()
 {
 	FVector LeftDirection = -GetActorRightVector();
@@ -521,6 +525,7 @@ bool AEnemyBase::PerformSphereTraceWithDirection(FVector Direction)
 	return HitResult.bBlockingHit;
 }
 
+//Start a custom Tick function when enter combat state, to update the available attacks based on contextual conditions 
 void AEnemyBase::StartAttacksUpdate()
 {
 	GetWorld()->GetTimerManager().SetTimer(UpdateAttackTimerHandle, this, &AEnemyBase::UpdateReadyAttacks, 0.2f, true);
@@ -538,6 +543,7 @@ void AEnemyBase::PlayDeathMontage_Implementation(UAnimMontage* TargetMontage)
 	GetMesh()->GetAnimInstance()->Montage_Stop(0.0f, MontageToStop);
 }
 
+//Called by a montage notify, to trigger a Weapon spawnable object during an attack animation montage
 void AEnemyBase::SpawnWeaponSpawnableActor_Implementation()
 {
 	if (CarriedActor)
@@ -791,6 +797,7 @@ void AEnemyBase::OnReceiveFinisherEnd(UAnimMontage* Montage, bool bInterrupted)
 	AIC->SetStateAsAttacking();
 }
 
+//Function tirggered by behavior tree, choose the attack to play from the ReadyAttacks
 void AEnemyBase::DefaultAttack_Implementation(AActor* AttackTarget)
 {
 	if (DamagableComponent->bIsDead)
@@ -893,13 +900,6 @@ void AEnemyBase::AttackMontagePlay_Implementation(const TMap<UAnimMontage*, FAIA
 	if (GetCanPlayAttackMontage() == false)
 		return;
 	int Num = ComboAttacks.Num();
-	
-	/*
-	if (AttacksCount == 0)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, "Move to");
-		AIC->MoveToActor(AIC->AttackTarget, 50.f);
-	}*/
 	
 	if (AttacksCount < Num)
 	{
@@ -1022,10 +1022,7 @@ bool AEnemyBase::GetTokenForAvailableAttack(int32 TokenNeeded)
 			return false;
 		}
 	}
-
-
-	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "COMBAT MANAGER IS NULL");
-
+	
 	return true;
 }
 
@@ -1069,11 +1066,10 @@ bool AEnemyBase::ShouldStopMontageForHitReaction()
 	return false;
 }
 
+//VFX and SFX currently handled by this blueprint event
 void AEnemyBase::BlockAttackFX_Implementation(FDamageSettings DamageSettings)
 {
 }
-
-
 
 void AEnemyBase::OnDeathEvent(AActor* Actor)
 {
