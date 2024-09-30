@@ -30,10 +30,7 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 		AIC->OnAttackFinishedDelegate.RemoveDynamic(this, &UBTTask_Attack::OnAttackFinished); // Ensure not double-bound
 		AIC->OnAttackFinishedDelegate.AddDynamic(this, &UBTTask_Attack::OnAttackFinished);
 	}
-
-	//AIC->OnAttackFinishedDelegate.AddDynamic(this, &UBTTask_Attack::OnAttackFinished);
-	//AIC->OnAttackFinishedDelegate.Ad
-
+	
 	return EBTNodeResult::InProgress;
 }
 
