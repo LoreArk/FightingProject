@@ -15,7 +15,7 @@ Welcome to **FighterProject**, a 3D beat 'em up game developed in Unreal Engine 
   - Directional hit reactions
   - Enemy grab system
   - Finisher system
-  - Special attacks system [View Special Attacks Code](Components/Component_SpecialMoves.cpp)
+  - Special attacks system 
   
 - **Throwable Objects and Weapons**: 
   - Various objects that can be thrown during combat.
