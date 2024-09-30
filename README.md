@@ -41,14 +41,7 @@ The primary goal of this repository is to demonstrate:
 - Implementation of **root motion** mechanics to enhance melee combat animations.
 
 ## Disclaimer
-- **Assets**: The project contains paid assets that are **not included** in this repository.
 - **Gameplay**: This is not a fully playable game. It is a work-in-progress project meant to show code and system logic.
 
-## Setup Instructions
-1. Clone the repository to your local machine.
-2. Ensure you have Unreal Engine installed.
-3. Open the `.uproject` file in Unreal Engine.
-4. Compile the project using Visual Studio.
-
 ## Contact
-For questions or feedback, feel free to contact me via my portfolio website.
+For questions or feedback, feel free to contact me via my [portfolio website](https://lorenzopusateri.wordpress.com//).
