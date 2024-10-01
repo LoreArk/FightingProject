@@ -1,6 +1,6 @@
 # FightingProject - 3D Beat 'Em Up Code Showcase
 
-Welcome to **FightingProject** source code repository, a 3D beat 'em up game developed in Unreal Engine using C++. This repository serves as a **code showcase** and is not intended as a full game distribution. The purpose of this repo is to showcase the coded gameplay systems, and design patterns used in this Unreal Engine project. 
+Welcome to **FightingProject** source code repository, a 3D beat 'em up game developed in Unreal Engine using C++. This repository serves as a **code showcase** and is not intended as a full game distribution. The purpose of this repo is to showcase the coded gameplay systems, and design patterns used in this Unreal Engine C++ project. 
 
 The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.io/)** page.
 
@@ -30,17 +30,9 @@ The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.
     - Arena levels
     - Mission levels
 
-
 ## Code Structure
 - **Source**: The repository contains the core C++ source code used in the game.
 - **Exclusions**: All paid assets, game content, and non-code resources (like models, textures, animations, etc.) have been excluded to comply with licensing requirements.
-
-## Purpose
-The primary goal of this repository is to demonstrate:
-- Advanced use of **Unreal Engine C++** features.
-- **AI-controlled combat behavior**.
-- **Input handling and custom attack systems**.
-- Implementation of **root motion** mechanics to enhance melee combat animations.
 
 ## Disclaimer
 - **Gameplay**: This is not a fully playable game. It is a work-in-progress project meant to show code and system logic.
