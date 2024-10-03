@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "PooledActor.h"
 
@@ -24,10 +22,6 @@ void APooledActor::SetInUse_Implementation(bool InUse)
 	if (bInUse)
 	{
 		GetWorldTimerManager().SetTimer(AliveTimerHandle, this, &APooledActor::ReturnToPool, TimeToLive);
-		/*GetWorld()->GetTimerManager().SetTimer(AliveTimerHandle, [this]()
-			{
-				ReturnToPool();
-			}, TimeToLive, false);*/
 	}
 
 }
@@ -40,7 +34,6 @@ void APooledActor::ReturnToPool()
 	}
 }
 
-// Called when the game starts or when spawned
 void APooledActor::BeginPlay()
 {
 	Super::BeginPlay();
