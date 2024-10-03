@@ -130,12 +130,6 @@ class AFightingProjectCharacter : public ACombatCharacter, public IInterface_Pla
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UComponent_Inputs* InputsComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Animations")
-	UAnimMontage* PickUpBoxAnimation;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Animations")
-	UAnimMontage* PickUpWeaponAnimation;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animations", meta = (AllowPrivateAccess = "true"))
 	TMap<UAnimMontage*, UAnimMontage*> GrabPosePair;
 
@@ -166,12 +160,8 @@ class AFightingProjectCharacter : public ACombatCharacter, public IInterface_Pla
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> HudClass;
-	
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUserWidget> SpecialMoveUI;
 
 	FOnSpecialMoveExecute OnSpecialMoveExecute;
-
 
 	UPROPERTY()
 	UAnimMontage* PriorityFinisherMontage;
