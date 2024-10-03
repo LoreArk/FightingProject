@@ -1,15 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BTTask_SetFocuse.h"
+#include "BTTask_SetFocus.h"
 #include "AIC_EnemyBase.h"
 
-UBTTask_SetFocuse::UBTTask_SetFocuse(FObjectInitializer const& ObjectInitializer)
+UBTTask_SetFocus::UBTTask_SetFocus(FObjectInitializer const& ObjectInitializer)
 {
 	NodeName = TEXT("Set Focus");
 }
 
-EBTNodeResult::Type UBTTask_SetFocuse::ExecuteTask(UBehaviorTreeComponent& OwnerComponent, uint8* NodeMemory)
+EBTNodeResult::Type UBTTask_SetFocus::ExecuteTask(UBehaviorTreeComponent& OwnerComponent, uint8* NodeMemory)
 {
 
 	AActor* AttackTarget = IInterface_Enemy::Execute_GetAttackTarget(OwnerComponent.GetAIOwner());
