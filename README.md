@@ -8,6 +8,7 @@ The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.
 - **Type**: 3D Beat 'Em Up Game
 - **Engine**: Unreal Engine
 - **Language**: Primarily developed in C++
+- **Gameplay Video** on [YouTube](https://youtu.be/3Vbd8vORqbk)
 ## Main Features
 - **Combat System**: 
   - A player-customizable combo system
