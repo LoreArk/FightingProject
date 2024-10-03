@@ -5,7 +5,7 @@
 
 UComponent_Attacks::UComponent_Attacks()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 }
 
