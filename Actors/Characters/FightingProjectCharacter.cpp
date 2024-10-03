@@ -53,8 +53,7 @@ AFightingProjectCharacter::AFightingProjectCharacter()
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
 
-	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
-	// instead of recompiling to adjust them
+	// Note: these variables can be tweaked in the Character Blueprint
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 400.f;
@@ -76,12 +75,11 @@ AFightingProjectCharacter::AFightingProjectCharacter()
 	HoldingObjectCameraBoom->bUsePawnControlRotation = true;
 
 	GrabCameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("GrabPoseCameraBoom"));
-	//GrabCameraBoom->SetupAttachment(GetMesh(), "spine_04");
 	GrabCameraBoom->SetupAttachment(RootComponent);
 	GrabCameraBoom->bUsePawnControlRotation = false;
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DefaultCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); 
 	FollowCamera->bUsePawnControlRotation = true; 
 
 	SpecialMovesComponent = CreateDefaultSubobject<UComponent_SpecialMoves>(TEXT("Special Moves Component"));
@@ -229,7 +227,6 @@ void AFightingProjectCharacter::Tick(float DeltaTime)
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-
 void AFightingProjectCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 
@@ -347,9 +344,6 @@ void AFightingProjectCharacter::Move(const FInputActionValue& Value)
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	MovementVector2D = MovementVector;
 	MovementVector2D.Normalize();
-
-	//FString MovementString = FString::Printf(TEXT("Movement Vector: (%f, %f)"), MovementVector2D.X, MovementVector2D.Y);
-	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, MovementString);
 
 	if (PriorityHitMontage != nullptr || bIsAttacking)
 	{
@@ -1004,7 +998,6 @@ void AFightingProjectCharacter::HoldAttackInput(const FInputActionInstance& Inst
 	if (HeldAction == CurrentAttackInput)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, ("HOLDING ATTACK INPUT"));
-
 		HoldingAttackInput = true;
 	}
 }
@@ -1662,28 +1655,11 @@ void AFightingProjectCharacter::ExecuteFinisher_Implementation(FVector WarpingLo
 
 	InputsComponent->SwitchInputMapping(EInputMode::Finisher);
 
-	AController* Contrl = GetController();
-	if (Contrl)
-	{
-		//Contrl->SetControlRotation(WarpingRotation);
-	}
-
 	MotionWarpingComponent->AddOrUpdateWarpTargetFromLocationAndRotation("Victim", WarpingLocation, WarpingRotation);
 
 	PriorityFinisherMontage = Montage;
 
 	GetMesh()->GetAnimInstance()->StopAllMontages(0.0f);
-
-	/*UAnimMontage* PlayingMontage = GetMesh()->GetAnimInstance()->GetCurrentActiveMontage();
-	
-	if (PlayingMontage != nullptr)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, PlayingMontage->GetName());
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, "CURRENT MONTAGE NULL");
-	}*/
 
 	GetMesh()->GetAnimInstance()->Montage_Play(Montage, 1.0f, EMontagePlayReturnType::MontageLength, 0.0f, true);
 	GetMesh()->GetAnimInstance()->OnMontageBlendingOut.AddDynamic(this, &AFightingProjectCharacter::OnFinisherAttackEnd);
@@ -1895,14 +1871,6 @@ void AFightingProjectCharacter::GrabCharacter()
 
 void AFightingProjectCharacter::ExitGrab()
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "GRAB POSE ENDED");
-	
-	if (GrabbedCharacter)
-	{
-		//FRotator TargetRotation = StaticFunctions::GetRotationForFacingDirection(this, GrabbedCharacter);
-		//GetController()->SetControlRotation(TargetRotation);
-	}
-
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	bUseControllerRotationYaw = true;
 
@@ -1914,8 +1882,6 @@ void AFightingProjectCharacter::ExitGrab()
 			if (CurrentIndex == 1)
 			{
 				FRotator ControllerRotation = GetControlRotation();
-				//ControllerRotation.Yaw += 180.0f;
-				//Controller->SetControlRotation(ControllerRotation);
 			}
 			break;
 		}
@@ -1946,11 +1912,8 @@ void AFightingProjectCharacter::PauseEvent()
 
 void AFightingProjectCharacter::PerformGrabAttack_Implementation(int32 ActionIndex)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "GRAB ACTION PERFROM");
-
 	if (ActionIndex == 0)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Green, "EXIT GRAB");
 		IInterface_CombatCharacter::Execute_ExitGrabPose(GrabbedCharacter);
 		ExitGrab();
 		return;
@@ -1967,8 +1930,6 @@ void AFightingProjectCharacter::PerformGrabAttack_Implementation(int32 ActionInd
 		}
 		else 
 		{
-			//IInterface_CombatCharacter::Execute_ExitGrabPose(GrabbedCharacter);
-			//ExitGrab();
 			return;
 		}
 	}
@@ -2002,8 +1963,6 @@ void AFightingProjectCharacter::PerformGrabAttack_Implementation(int32 ActionInd
 
 void AFightingProjectCharacter::GrabAttackEnd()
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Green, "SET CONTROL ROTATION");
-
 	FRotator ControllerRotation = GetControlRotation();
 	ControllerRotation.Yaw += 180.0f;
 	Controller->SetControlRotation(ControllerRotation);
