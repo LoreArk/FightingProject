@@ -35,7 +35,6 @@ void APooled_Bullet::Tick(float DeltaTime)
 
 	AActor* HitActor = nullptr;
 	UPrimitiveComponent* HitComponent = nullptr;
-	//FHitResult HitResult = StaticFunctions::SphereCollisionTraceChannel(GetWorld(), GetActorLocation(), GetActorLocation(), ETraceTypeQuery::TraceTypeQuery4, ActorsToIgnore, BulletTraceRadius);
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_WorldStatic));
 	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_GameTraceChannel2));
