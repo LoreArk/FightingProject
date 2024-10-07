@@ -4,6 +4,8 @@ Welcome to **FightingProject** source code repository, a 3D beat 'em up game dev
 
 The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.io/space-outlaw-proto)** page.
 
+**[YouTube video](https://www.youtube.com/watch?v=vafVEYlXQg0&ab_channel=LorenzoPusateri)**, showcasing the main game features.
+
 ## Project Overview
 - **Type**: 3D Beat 'Em Up Game
 - **Engine**: Unreal Engine
