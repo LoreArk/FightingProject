@@ -340,7 +340,6 @@ void AFightingProjectCharacter::HandleMovementInput()
 
 void AFightingProjectCharacter::Move(const FInputActionValue& Value)
 {
-	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	MovementVector2D = MovementVector;
 	MovementVector2D.Normalize();
@@ -377,7 +376,6 @@ void AFightingProjectCharacter::MoveCompleted(const FInputActionValue& Value)
 
 void AFightingProjectCharacter::Look(const FInputActionValue& Value)
 {
-	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	if (bDodgeStance && AttackTarget || PriorityHitMontage != nullptr || bCanDodge == false)
@@ -387,7 +385,6 @@ void AFightingProjectCharacter::Look(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
-		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
@@ -1188,7 +1185,6 @@ TArray<AActor*> AFightingProjectCharacter::DodgeStanceTrace()
 {
 	TArray<AActor*> OverlappingTargets;
 
-	// Get the player position
 	FVector PlayerPosition = GetActorLocation();
 
 	// Sphere trace settings
@@ -1197,7 +1193,7 @@ TArray<AActor*> AFightingProjectCharacter::DodgeStanceTrace()
 	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
 
 	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(this); // Ignore self
+	ActorsToIgnore.Add(this);
 
 	// Sphere trace to find all overlapping actors
 	TArray<FHitResult> OutHits;
@@ -1225,7 +1221,7 @@ TArray<AActor*> AFightingProjectCharacter::DodgeStanceTrace()
 
 			if (HitActor && HitActor->GetClass()->ImplementsInterface(UInterface_CombatCharacter::StaticClass()))
 			{
-				// Perform a line trace to check for visibility
+				// line trace to check for visibility
 				FHitResult LineTraceHit;
 				FVector TargetPosition = HitActor->GetActorLocation();
 				bool bIsVisible = GetWorld()->LineTraceSingleByChannel(
@@ -1236,7 +1232,6 @@ TArray<AActor*> AFightingProjectCharacter::DodgeStanceTrace()
 					FCollisionQueryParams(FName(TEXT("VisibilityTrace")), true, this)
 				);
 
-				// Check if the line trace hit the target actor
 				if (bIsVisible && LineTraceHit.GetActor() == HitActor)
 				{
 					OverlappingTargets.AddUnique(HitActor);
