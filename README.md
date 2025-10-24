@@ -39,4 +39,4 @@ The **game prototype** is downloadable from my **[Itch.io](https://loreark.itch.
 - **Gameplay**: This is not a fully playable game. It is a work-in-progress project meant to show code and system logic.
 
 ## Contact
-For questions or feedback, feel free to contact me via my [portfolio website](https://lorenzopusateri.wordpress.com//).
+For questions or feedback, feel free to contact me via my [portfolio website](https://loreark.github.io/).
